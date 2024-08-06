@@ -4,7 +4,7 @@ import { connect } from 'cloudflare:sockets';
 
 // How to generate your own UUID:
 // [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
-let userID = '19385c4f-3753-4576-a601-a2d6e68bc626';
+let userID = 'b304b112-8da4-4b39-88d0-ef463423ec84';
 
 let proxyIP = '';// 小白勿动，该地址并不影响你的网速，这是给CF代理使用的。'cdn.xn--b6gac.eu.org, cdn-all.xn--b6gac.eu.org, workers.cloudflare.cyou'
 
@@ -980,19 +980,19 @@ async function getVLESSConfig(userID, hostName, sub, UA, RproxyIP, _url) {
 	const clash = Config[1];
 	// 如果sub为空，则显示原始内容
 	if ( userAgent.includes('mozilla') && !subParams.some(_searchParams => _url.searchParams.has(_searchParams))) {
-		let 订阅器 = `您的订阅内容由 ${sub} 提供维护支持, 自动获取ProxyIP: ${RproxyIP}`;
+		let 订阅器 = `订阅内容由 ${sub} 提供维护支持, 自动获取ProxyIP: ${RproxyIP}`;
 		if (!sub || sub == '') {
 			if (!proxyIP || proxyIP =='') {
-				订阅器 = '您的订阅内容由 内置 addresses/ADD 参数提供, 当前使用的ProxyIP为空, 推荐您设置 proxyIP/PROXYIP ！！！';
+				订阅器 = '订阅内容由 内置 addresses/ADD 参数提供, 当前使用的ProxyIP为空, 推荐您设置 proxyIP/PROXYIP ！！！';
 			} else {
-				订阅器 = `您的订阅内容由 内置 addresses/ADD 参数提供, 当前使用的ProxyIP： ${proxyIPs.join(',')}`;
+				订阅器 = `订阅内容由 内置 addresses/ADD 参数提供, 当前使用的ProxyIP： ${proxyIPs.join(',')}`;
 			}
 		} else if (RproxyIP != 'true'){
 			订阅器 += `, 当前使用的ProxyIP： ${proxyIPs.join(',')}`;
 		}
 		return `
 ################################################################
-Subscribe / sub 订阅地址, 支持 Base64、clash-meta、sing-box 订阅格式, ${订阅器}
+Cloudflare Workers代理服务器, Edgetunnel项目, ${订阅器}
 ---------------------------------------------------------------
 快速自适应订阅地址:
 https://${hostName}/${userID}
@@ -1020,11 +1020,8 @@ clash-meta
 ${clash}
 ---------------------------------------------------------------
 ################################################################
-telegram 交流群 技术大佬~在线发牌!
-https://t.me/CMLiussss
----------------------------------------------------------------
-github 项目地址 Star!Star!Star!!!
-https://github.com/cmliu/edgetunnel
+github 项目地址
+https://github.com/Glaser-Han/edgetunnel
 ---------------------------------------------------------------
 ################################################################
 `;
@@ -1353,7 +1350,7 @@ function subAddresses(host,UUID,noTLS,newAddressesapi,newAddressescsv,newAddress
 			if(proxyhosts.length > 0 && (伪装域名.includes('.workers.dev') || 伪装域名.includes('pages.dev'))) {
 				最终路径 = `/${伪装域名}${最终路径}`;
 				伪装域名 = proxyhosts[Math.floor(Math.random() * proxyhosts.length)];
-				节点备注 = ` 已启用临时域名中转服务，请尽快绑定自定义域！`;
+				节点备注 = ` `;
 			}
 
 			const vlessLink = `vless://${UUID}@${address}:${port}?encryption=none&security=&type=ws&host=${伪装域名}&path=${encodeURIComponent(最终路径)}#${encodeURIComponent(addressid + 节点备注)}`;
@@ -1405,7 +1402,7 @@ function subAddresses(host,UUID,noTLS,newAddressesapi,newAddressescsv,newAddress
 		if(proxyhosts.length > 0 && (伪装域名.includes('.workers.dev') || 伪装域名.includes('pages.dev'))) {
 			最终路径 = `/${伪装域名}${最终路径}`;
 			伪装域名 = proxyhosts[Math.floor(Math.random() * proxyhosts.length)];
-			节点备注 = ` 已启用临时域名中转服务，请尽快绑定自定义域！`;
+			节点备注 = ` `;
 		}
 		
 		const 协议类型 = atob(啥啥啥_写的这是啥啊);
