@@ -1,12 +1,52 @@
-# edgetunnel
-这是一个基于 CF Worker 平台的脚本，在原版的基础上修改了显示 VLESS 配置信息转换为订阅内容。使用该脚本，你可以方便地将 VLESS 配置信息使用在线配置转换到 Clash 或 Singbox 等工具中。
+# Cloudflare-Worker-edgetunnel
+一个用于构建和管理 Edge Computing 应用的工具集。旨在将计算资源和数据处理能力推向网络边缘，减少数据传输的延迟和带宽消耗。
+这是一个基于 Cloudflare Worker 平台的脚本，在原版的基础上修改了显示 VLESS 配置信息转换为订阅内容。使用该脚本，你可以方便地将 VLESS 配置信息使用在线配置转换到 Clash 或 Singbox 等工具中。
 
-- 基础部署视频教程：https://www.youtube.com/watch?v=LeT4jQUh8ok
-- 快速部署视频教程：https://www.youtube.com/watch?v=59THrmJhmAw ***最佳推荐!!!***
-- 进阶使用视频教程：https://www.youtube.com/watch?v=s91zjpw3-P8
-- **从入门到精通**教程：https://www.youtube.com/watch?v=oRYnrp5rQSc ***必看内容!必看内容!必看内容!!!***
+# 原理
+该服务基于Cloudflare 的 Edge Tunnel 服务。Cloudflare 的 Edge Tunnel 服务是一种安全隧道服务，允许用户将自己的应用程序或服务部署在 Cloudflare 的全球边缘网络上，而无需暴露其原始 IP 地址或端口号。Edge Tunnel 服务提供了一种安全、可靠和高性能的方式来访问和管理应用程序。
 
-Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networks](https://url.cmliussss.com/alice)提供的云服务器维持[CM订阅转换服务](https://sub.fxxk.dedyn.io/)！**
+安全隧道：Edge Tunnel 服务创建一个安全的隧道，将您的应用程序或服务连接到 Cloudflare 的边缘网络。这样可以保护您的应用程序免受未经授权的访问和攻击。
+IP 地址和端口号隐藏：Edge Tunnel 服务允许您隐藏应用程序的原始 IP 地址和端口号，从而保护您的应用程序免受攻击和扫描。
+负载均衡和路由：Edge Tunnel 服务提供负载均衡和路由功能，可以将流量分发到多个后端服务器，从而提高应用程序的可用性和性能。
+SSL/TLS 加密：Edge Tunnel 服务支持 SSL/TLS 加密，可以确保数据在传输过程中的安全性。
+流量管理：Edge Tunnel 服务提供流量管理功能，可以帮助您控制和优化流量，例如，限制流量速率、阻止特定 IP 地址等。
+监控和分析：Edge Tunnel 服务提供监控和分析功能，可以帮助您实时监控应用程序的性能和安全性。
+支持多种协议：Edge Tunnel 服务支持多种协议，包括 HTTP、HTTPS、TCP、UDP 等。
+集成 Cloudflare 的其他服务：Edge Tunnel 服务可以与 Cloudflare 的其他服务集成，例如，Cloudflare 的 CDN、WAF、DDoS 保护等。
+Edge Tunnel 服务的应用场景包括：
+
+保护应用程序免受攻击：Edge Tunnel 服务可以保护应用程序免受未经授权的访问和攻击。
+提高应用程序的可用性：Edge Tunnel 服务可以通过负载均衡和路由功能提高应用程序的可用性。
+优化应用程序的性能：Edge Tunnel 服务可以通过流量管理和优化功能提高应用程序的性能。
+简化应用程序的部署：Edge Tunnel 服务可以简化应用程序的部署过程，减少部署时间和成本。
+
+edgetunnel 实现网络代理的实现主要依赖于其自定义的 Tunnel 协议和相关组件。以下是简要的概述：
+
+Tunnel 协议：edgetunnel 定义了一个自定义的 Tunnel 协议，用于在 Edge 设备和云端之间建立安全的通信通道。该协议基于 TCP/IP 协议栈，使用 TLS 加密确保数据传输的安全性。
+Tunnel Agent：在 Edge 设备上运行的 Tunnel Agent 负责建立和维护 Tunnel 连接。它会与云端的 Tunnel Server 建立连接，并将 Edge 设备的网络流量转发到云端。
+Tunnel Server：云端的 Tunnel Server 接收来自 Edge 设备的 Tunnel Agent 的连接请求，并建立安全的 Tunnel 连接。它还负责将来自 Edge 设备的网络流量转发到目标服务器。
+代理模式：edgetunnel 支持两种代理模式：
+透明代理（Transparent Proxy）：Edge 设备的网络流量会被直接转发到云端的 Tunnel Server，而无需修改原始请求。
+反向代理（Reverse Proxy）：Edge 设备的网络流量会被转发到云端的 Tunnel Server，然后再转发到目标服务器。
+流量管理：edgetunnel 提供了流量管理功能，允许开发者配置流量规则，控制 Edge 设备的网络流量转发到云端或目标服务器。
+edgetunnel 的网络代理实现架构如下：
+`+---------------+
+|  Edge Device  |
++---------------+
+          |
+          |  Tunnel Agent
+          v
++---------------+
+|  Tunnel Server  |
++---------------+
+          |
+          |  代理模式（透明或反向）
+          v
++---------------+
+| 目标服务器  |
++---------------+`
+
+通过这种架构，edgetunnel 能够提供一个安全、可靠的网络代理解决方案，适用于各种 Edge Computing 应用场景。
 
 # 免责声明
 
@@ -19,7 +59,7 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
 在下载和使用本项目代码时，必须遵守使用者所适用的法律和规定。使用者有责任确保其行为符合所在地区的法律框架、规章制度及其他相关规定。
 
 ### 免责
-1. 作为本项目的 **二次开发作者**（以下简称“作者”），我 **cmliu** 强调本项目仅应用于合法、道德和教育目的。
+1. 作为本项目的 **二次开发作者Glaser**（以下简称“作者”），我 **cmliu** 强调本项目仅应用于合法、道德和教育目的。
 2. 作者不认可、不支持亦不鼓励任何形式的非法使用。如果发现本项目被用于任何非法或不道德的活动，作者将对此强烈谴责。
 3. 作者对任何人或组织利用本项目代码从事的任何非法活动不承担责任。使用本项目代码所产生的任何后果，均由使用者自行承担。
 4. 作者不对使用本项目代码可能引起的任何直接或间接损害负责。
@@ -33,10 +73,10 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
 - 通过提交虚假的节点配置给订阅服务，避免节点配置信息泄露。
 - 另外，您也可以选择自行部署 [WorkerVless2sub 订阅生成服务](https://github.com/cmliu/WorkerVless2sub)，这样既可以利用订阅生成器的便利。
    
-## Workers 部署方法 [视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=83s)
+## Workers 部署方法
 1. 部署 CF Worker：
    - 在 CF Worker 控制台中创建一个新的 Worker。
-   - 将 [worker.js](https://github.com/cmliu/edgetunnel/blob/main/_worker.js) 的内容粘贴到 Worker 编辑器中。
+   - 将 [worker.js]的内容粘贴到 Worker 编辑器中。
    - 将第 7 行 `userID` 修改成你自己的 **UUID** 。
 
 2. 访问订阅内容：
@@ -49,25 +89,19 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
 3. 给 workers绑定 自定义域： 
    - 在 workers控制台的 `触发器`选项卡，下方点击 `添加自定义域`。
    - 填入你已转入 CF 域名解析服务的次级域名，例如:`vless.google.com`后 点击`添加自定义域`，等待证书生效即可。
-   - **如果你是小白，你现在可以直接起飞，不用再往下看了！！！**
-
-<details>
-<summary><code><strong>「 我不是小白！我真的真的不是小白！我要玩花活！我要开启高端玩法！ 」</strong></code></summary>
 
 4. 使用自己的`优选域名`/`优选IP`的订阅内容：
    - 如果你想使用自己的优选域名或者是自己的优选IP，可以参考 [WorkerVless2sub GitHub 仓库](https://github.com/cmliu/WorkerVless2sub) 中的部署说明自行搭建。
-   - 打开 [worker.js](https://github.com/cmliu/edgetunnel/blob/main/_worker.js) 文件，在第 12 行找到 `sub` 变量，将其修改为你部署的订阅生成器地址。例如 `let sub = 'sub.cmliussss.workers.dev';`，注意不要带https等协议信息和符号。
+   - 打开 [worker.js] 文件，在第 12 行找到 `sub` 变量，将其修改为你部署的订阅生成器地址。例如 `let sub = 'sub.cmliussss.workers.dev';`，注意不要带https等协议信息和符号。
    - 注意，如果您使用了自己的订阅地址，要求订阅生成器的 `sub`域名 和 `[YOUR-WORKER-URL]`的域名 不同属一个顶级域名，否则会出现异常。您可以在 `sub` 变量赋值为 workers.dev 分配到的域名。
 
-</details>
 
-## Pages 上传 部署方法 **最佳推荐!!!** [视频教程](https://www.youtube.com/watch?v=59THrmJhmAw)
+## Pages 上传 部署方法
 1. 部署 CF Pages：
-   - 下载 [main.zip](https://github.com/cmliu/edgetunnel/archive/refs/heads/main.zip) 文件，并点上 Star !!!
-   - 在 CF Pages 控制台中选择 `上传资产`后，为你的项目取名后点击 `创建项目`，然后上传你下载好的 [main.zip](https://github.com/cmliu/edgetunnel/archive/refs/heads/main.zip) 文件后点击 `部署站点`。
+   - 在 CF Pages 控制台中选择 `上传资产`后，为你的项目取名后点击 `创建项目`，然后上传你的 [main.zip]文件后点击 `部署站点`。
    - 部署完成后点击 `继续处理站点` 后，选择 `设置` > `环境变量` > **制作**为生产环境定义变量 > `添加变量`。
      变量名称填写**UUID**，值则为你的UUID，后点击 `保存`即可。
-   - 返回 `部署` 选项卡，在右下角点击 `创建新部署` 后，重新上传 [main.zip](https://github.com/cmliu/edgetunnel/archive/refs/heads/main.zip) 文件后点击 `保存并部署` 即可。
+   - 返回 `部署` 选项卡，在右下角点击 `创建新部署` 后，重新上传 [main.zip]文件后点击 `保存并部署` 即可。
 
 2. 访问订阅内容：
    - 访问 `https://[YOUR-PAGES-URL]/[YOUR-UUID]` 即可获取订阅内容。
@@ -76,19 +110,13 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
    - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?clash` Clash订阅格式，适用OpenClash等。
    - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?sb` singbox订阅格式，适用singbox等。
 
-<details>
-<summary><code><strong>「 我自己有域名！我要绑定自己的域名！我已经熟练的掌握域名解析！ 」</strong></code></summary>
-   
-3. 给 Pages绑定 CNAME自定义域：[视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=851s)
+
+3. 给 Pages绑定 CNAME自定义域
    - 在 Pages控制台的 `自定义域`选项卡，下方点击 `设置自定义域`。
    - 填入你的自定义次级域名，注意不要使用你的根域名，例如：
      您分配到的域名是 `fuck.cloudns.biz`，则添加自定义域填入 `lizi.fuck.cloudns.biz`即可；
    - 按照 CF 的要求将返回你的域名DNS服务商，添加 该自定义域 `lizi`的 CNAME记录 `edgetunnel.pages.dev` 后，点击 `激活域`即可。
-   - **如果你是小白，那么你的 pages 绑定`自定义域`之后即可直接起飞，不用再往下看了！！！**
-   - 
-</details>
-<details>
-<summary><code><strong>「 我不是小白！我真的真的不是小白！我要玩花活！我要开启高端玩法！ 」</strong></code></summary>
+
    
 4. 使用自己的`优选域名`/`优选IP`的订阅内容：
    - 如果你想使用自己的优选域名或者是自己的优选IP，可以参考 [WorkerVless2sub GitHub 仓库](https://github.com/cmliu/WorkerVless2sub) 中的部署说明自行搭建。
@@ -97,11 +125,10 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
    - 之后在 Pages控制台的 `部署`选项卡，选择 `所有部署`> `最新部署最右的 ...`> `重试部署`，即可。
    - 注意，如果您使用了自己的订阅地址，要求订阅生成器的 `SUB`域名 和 `[YOUR-PAGES-URL]`的域名 不同属一个顶级域名，否则会出现异常。您可以在 `SUB` 变量赋值为 Pages.dev 分配到的域名。
 
-</details>
 
-## Pages GitHub 部署方法 [视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=560s)
+## Pages GitHub 部署方法
 1. 部署 CF Pages：
-   - 在 Github 上先 Fork 本项目，并点上 Star !!!
+   - 在 Github 上先 Fork 本项目，并点上 Star ~
    - 在 CF Pages 控制台中选择 `连接到 Git`后，选中 `edgetunnel`项目后点击 `开始设置`。
    - 在 `设置构建和部署`页面下方，选择 `环境变量（高级）`后并 `添加变量`
      变量名称填写**UUID**，值则为你的UUID，后点击 `保存并部署`即可。
@@ -113,15 +140,12 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
    - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?clash` Clash订阅格式，适用OpenClash等。
    - 例如 `https://edgetunnel.pages.dev/90cd4a77-141a-43c9-991b-08263cfe9c10?sb` singbox订阅格式，适用singbox等。
 
-3. 给 Pages绑定 CNAME自定义域：[视频教程](https://www.youtube.com/watch?v=LeT4jQUh8ok&t=851s)
+3. 给 Pages绑定 CNAME自定义域
    - 在 Pages控制台的 `自定义域`选项卡，下方点击 `设置自定义域`。
    - 填入你的自定义次级域名，注意不要使用你的根域名，例如：
      您分配到的域名是 `fuck.cloudns.biz`，则添加自定义域填入 `lizi.fuck.cloudns.biz`即可；
    - 按照 CF 的要求将返回你的域名DNS服务商，添加 该自定义域 `lizi`的 CNAME记录 `edgetunnel.pages.dev` 后，点击 `激活域`即可。
-   - **如果你是小白，那么你的 pages 绑定`自定义域`之后即可直接起飞，不用再往下看了！！！**
 
-<details>
-<summary><code><strong>「 我不是小白！我真的真的不是小白！我要玩花活！我要开启高端玩法！ 」</strong></code></summary>
 
 4. 使用自己的`优选域名`/`优选IP`的订阅内容：
    - 如果你想使用自己的优选域名或者是自己的优选IP，可以参考 [WorkerVless2sub GitHub 仓库](https://github.com/cmliu/WorkerVless2sub) 中的部署说明自行搭建。
@@ -130,7 +154,6 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
    - 之后在 Pages控制台的 `部署`选项卡，选择 `所有部署`> `最新部署最右的 ...`> `重试部署`，即可。
    - 注意，如果您使用了自己的订阅地址，要求订阅生成器的 `SUB`域名 和 `[YOUR-PAGES-URL]`的域名 不同属一个顶级域名，否则会出现异常。您可以在 `SUB` 变量赋值为 Pages.dev 分配到的域名。
 
-</details>
 
 ## 变量说明
 | 变量名 | 示例 | 必填 | 备注 | YT |
@@ -192,8 +215,6 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
    ```
 
 
-## Star 星星走起
-[![Stargazers over time](https://starchart.cc/cmliu/edgetunnel.svg?variant=adaptive)](https://starchart.cc/cmliu/edgetunnel)
 
 ## 已适配自适应订阅内容
    - [v2rayN](https://github.com/2dust/v2rayN)
@@ -204,4 +225,5 @@ Telegram交流群：[@CMLiussss](https://t.me/CMLiussss)，**感谢[Alice Networ
 
 
 # 感谢
-[zizifn](https://github.com/zizifn/edgetunnel)、[3Kmfi6HP](https://github.com/3Kmfi6HP/EDtunnel)、[Stanley-baby](https://github.com/Stanley-baby)、[ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash/config)、[SHIJS1999](https://github.com/SHIJS1999/cloudflare-worker-vless-ip)、<a href="https://url.cmliussss.com/alice"><img src="https://alicenetworks.net/templates/lagom2/assets/img/logo/logo_big.194980063.png" width="150" height="75" alt="Alice Networks LTD"/></a>、
+[zizifn](https://github.com/zizifn/edgetunnel)、[3Kmfi6HP](https://github.com/3Kmfi6HP/EDtunnel)、[Stanley-baby](https://github.com/Stanley-baby)、[ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash/config)、[SHIJS1999](https://github.com/SHIJS1999/cloudflare-worker-vless-ip)、<a href="https://url.cmliussss.com/alice"><img src="https://alicenetworks.net/templates/lagom2/assets/img/logo/logo_big.194980063.png" width="150" height="75" alt="Alice Networks LTD"/></a>、[cmliu]([https://github.com/Stanley-baby](https://github.com/cmliu/edgetunnel/commits?author=cmliu))
+
