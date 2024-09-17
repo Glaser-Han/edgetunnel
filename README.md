@@ -50,8 +50,7 @@ edgetunnel 的网络代理实现架构如下：
 
 # 免责声明
 
-本免责声明适用于 GitHub 上的 “edgetunnel” 项目（以下简称“本项目”），项目链接为：https://github.com/cmliu/edgetunnel 。
-
+本免责声明适用于 GitHub 上的 “edgetunnel” 项目（以下简称“本项目”）.
 ### 用途
 本项目仅供教育、研究和安全测试目的而设计和开发。旨在为安全研究人员、学术界人士及技术爱好者提供一个探索和实践网络通信技术的工具。
 
@@ -222,7 +221,8 @@ edgetunnel 的网络代理实现架构如下：
 ](https://github.com/clash-verge-rev/clash-verge-rev)，[Clash Nyanpasu](https://github.com/keiko233/clash-nyanpasu)，~[clash-verge](https://github.com/zzzgydi/clash-verge/tree/main)~，ClashX Meta）
    - sing-box（SFI）
 
-
+# 原项目地址
+https://github.com/cmliu/edgetunnel 。
 
 # 感谢
 [zizifn](https://github.com/zizifn/edgetunnel)、[3Kmfi6HP](https://github.com/3Kmfi6HP/EDtunnel)、[Stanley-baby](https://github.com/Stanley-baby)、[ACL4SSR](https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash/config)、[SHIJS1999](https://github.com/SHIJS1999/cloudflare-worker-vless-ip)、<a href="https://url.cmliussss.com/alice"><img src="https://alicenetworks.net/templates/lagom2/assets/img/logo/logo_big.194980063.png" width="150" height="75" alt="Alice Networks LTD"/></a>、[cmliu]([https://github.com/Stanley-baby](https://github.com/cmliu/edgetunnel/commits?author=cmliu))
