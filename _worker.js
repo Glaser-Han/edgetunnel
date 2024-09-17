@@ -4,7 +4,7 @@ import { connect } from 'cloudflare:sockets';
 
 // How to generate your own UUID:
 // [Windows] Press "Win + R", input cmd and run:  Powershell -NoExit -Command "[guid]::NewGuid()"
-let userID = '90cd4a77-141a-43c9-991b-08263cfe9c10';
+let userID = '';// UUID
 
 let proxyIP = '';// 小白勿动，该地址并不影响你的网速，这是给CF代理使用的。'cdn.xn--b6gac.eu.org, cdn-all.xn--b6gac.eu.org, workers.cloudflare.cyou'
 
@@ -1198,7 +1198,6 @@ async function ADD(envadd) {
 function checkSUB(host) {
 	if ((!sub || sub == '') && (addresses.length + addressesapi.length + addressesnotls.length + addressesnotlsapi.length + addressescsv.length) == 0){
 		addresses = [
-			'Join.my.Telegram.channel.CMLiussss.to.unlock.more.premium.nodes.cf.090227.xyz#加入我的频道t.me/CMLiussss解锁更多优选节点',
 			'visa.cn:443',
 			'www.visa.com:8443',
 			'cis.visa.com:2053',
@@ -1342,7 +1341,7 @@ async function getVLESSConfig(userID, hostName, sub, UA, RproxyIP, _url) {
 
 		return `
 ################################################################
-Subscribe / sub 订阅地址, 支持 Base64、clash-meta、sing-box 订阅格式
+Cloudflare Workers代理服务器, Edgetunnel项目订阅地址, 支持 Base64、clash-meta、sing-box 订阅格式
 ---------------------------------------------------------------
 快速自适应订阅地址:
 https://${proxyhost}${hostName}/${userID}
@@ -1382,11 +1381,8 @@ clash-meta
 ${clash}
 ---------------------------------------------------------------
 ################################################################
-telegram 交流群 技术大佬~在线发牌!
-https://t.me/CMLiussss
----------------------------------------------------------------
 github 项目地址 Star!Star!Star!!!
-https://github.com/cmliu/edgetunnel
+https://github.com/Glaser-Han/edgetunnel
 ---------------------------------------------------------------
 ################################################################
 `;
